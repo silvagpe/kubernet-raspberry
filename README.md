@@ -8,9 +8,9 @@ https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit
 Before use the https://www.balena.io/etcher/ to write on SD Card
 
 
-## Before remove SD Card
+### Before remove SD Card
 
-### Configure hostname and hosts
+#### Configure hostname and hosts
 
 In SD Card locate the directory below
 ```
@@ -18,7 +18,7 @@ sudo nano /media/$USER/rootfs/etc/hostname
 sudo nano /media/$USER/rootfs/etc/hosts
 ```
 
-### Configure boot options
+#### Configure boot options
 
 
 In SD Card locate the directory below and add the configuretion in then end of the same line 
@@ -30,7 +30,7 @@ sudo nano /media/$USER/boot/cmdline.txt
 
 ```
 
-### Configure SSH access
+#### Configure SSH access
 
 This config create a file with zero bytes to enable ssh service on first start
 ```
@@ -57,3 +57,6 @@ sudo apt update && sudo apt dist-upgrade
 
 ### References
 https://wiki.learnlinux.tv/index.php/How_to_build_your_own_Raspberry_Pi_Kubernetes_Cluster
+
+
+https://www.youtube.com/watch?v=B2wAJ5FLOYw
