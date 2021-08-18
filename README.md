@@ -116,6 +116,23 @@ sudo pip3 install docker-compose
     },
     "storage-driver": "overlay2"
 }
+
+```
+Alternative Option
+
+```bash
+
+cat > /etc/docker/daemon.json <<EOF
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+
 ```
 ### Reboot Raspberry again
 
@@ -207,6 +224,53 @@ kubectl get nodes
 kube-control-panel   Ready    control-plane,master   6m15s   v1.22.0
 
 ```
+## Configure Autocomplete 
+
+
+```bash
+
+#bash
+source <(kubectl completion bash) # configuração de autocomplete no bash do shell atual, o pacote bash-completion precisa ter sido instalado primeiro.
+echo "source <(kubectl completion bash)" >> ~/.bashrc # para adicionar o autocomplete permanentemente no seu shell bash.
+
+#ZSH
+source <(kubectl completion zsh)  # configuração para usar autocomplete no terminal zsh no shell atual
+echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~/.zshrc # adicionar auto completar permanentemente para o seu shell zsh
+
+```
+
+## Run pods on master
+
+
+
+```bash
+
+#Remove taint 'NoSchedule'
+kubectl taint node mymasternode node-role.kubernetes.io/master:NoSchedule-
+
+#Restore taint 'NoSchedule'
+kubectl taint node mymasternode node-role.kubernetes.io/master:NoSchedule
+
+```
+
+## Run first test
+
+
+
+```bash
+kubectl run nginx --image nginx
+kubectl get pods
+kubectl describe pod nginx
+kubectl get events
+kubectl get pod nginx -o yaml
+kubectl delete pod nginx
+
+kubectl run meu-nginx --image nginx --dry-run=client -o yaml > pod-template.yaml
+
+
+```
+
+
 
 
 
